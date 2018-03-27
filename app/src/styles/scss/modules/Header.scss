@@ -1,0 +1,20 @@
+header {
+  border-bottom: 1px solid black;
+  text-align: center;
+  padding: $padding-1;
+  h1 {
+    font-family: $font-family-title;
+    font-weight: bold;
+  }
+}
+
+.nav-bar {
+  display: inline-flex;
+  li {
+    padding: $padding-1;
+    width: 100%;
+    list-style: none;
+    text-align: center;
+    cursor: pointer;
+  }
+}
