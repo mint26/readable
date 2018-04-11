@@ -10,8 +10,8 @@ class Main extends Component {
       <div className="app-main-content">
         <Switch>
           <Route exact path="/" component={DefaultView} />
-          <Route path="/post" component={PostView} />
-          <Route path="/edit" component={EditPostView} />
+          <Route path="/post/:id?" component={PostView} />
+          <Route path="/edit/:id?" component={EditPostView} />
         </Switch>
       </div>
     );

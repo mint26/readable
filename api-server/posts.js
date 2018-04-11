@@ -7,7 +7,7 @@ const defaultData = {
     id: '8xf0y6ziyjabvozdd253nd',
     timestamp: 1467166872634,
     title: 'Udacity is the best place to learn React',
-    body: 'Everyone says so after all.',
+    body: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
     author: 'thingtwo',
     category: 'react',
     voteScore: 6,
@@ -16,12 +16,45 @@ const defaultData = {
   },
   "6ni6ok3ym7mf1p33lnez": {
     id: '6ni6ok3ym7mf1p33lnez',
-    timestamp: 1468479767190,
+    timestamp: 1468479717190,
     title: 'Learn Redux in 10 minutes!',
-    body: 'Just kidding. It takes more than 10 minutes to learn technology.',
+    body: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
     author: 'thingone',
     category: 'redux',
     voteScore: -5,
+    deleted: false,
+    commentCount: 0
+  },
+  "6ni6ok3ym7mf1p33leez": {
+    id: '6ni6ok3ym7mf1p33leez',
+    timestamp: 1514764800000,
+    title: 'Learn Redux in 10 minutes!',
+    body: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
+    author: 'thingone',
+    category: 'redux',
+    voteScore: 10,
+    deleted: false,
+    commentCount: 0
+  },
+  "6ni6ok3ym7mf1p33ldez": {
+    id: '6ni6ok3ym7mf1p33ldez',
+    timestamp: 1493596800000,
+    title: 'Learn Redux in 10 minutes!',
+    body: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
+    author: 'thingone',
+    category: 'redux',
+    voteScore: 2,
+    deleted: false,
+    commentCount: 0
+  },  
+  "6ni6ok3ym7mf1p33fdez": {
+    id: '6ni6ok3ym7mf1p33fdez',
+    timestamp: 1468679767190,
+    title: 'Learn Redux in 10 minutes!',
+    body: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
+    author: 'thingone',
+    category: 'redux',
+    voteScore: 7,
     deleted: false,
     commentCount: 0
   }

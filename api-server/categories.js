@@ -15,6 +15,18 @@ const defaultData = [
   {
     name: "udacity",
     path: "udacity"
+  },
+  {
+    name: "testing",
+    path: "testing"
+  },
+  {
+    name: "data science",
+    path: "data science"
+  },
+  {
+    name: "philosophy",
+    path: "philosophy"
   }
 ];
 

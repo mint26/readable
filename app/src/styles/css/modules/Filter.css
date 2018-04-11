@@ -1,0 +1,13 @@
+.filter {
+  border: 1px solid red;
+  display: inline-block; }
+  .filter > div {
+    width: 30px;
+    height: 30px;
+    float: left; }
+  .filter .order-by-vote {
+    background-image: url("../../assets/sortBy.svg");
+    background-size: cover; }
+  .filter .order-by-timestamp {
+    background-image: url("../../assets/sortBy.svg");
+    background-size: cover; }

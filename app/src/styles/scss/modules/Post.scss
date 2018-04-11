@@ -15,6 +15,7 @@
       font-weight: bolder;
       padding: 0;
       font-family: $font-family-title;
+      cursor: pointer;
     }
 
     .header-vote {
@@ -39,6 +40,14 @@
           font-weight: bold;
           font-style: italic;
         }
+
+        .edit-icon{
+          padding:$padding-1; 
+            img{
+              width:20px; 
+              height:20px; 
+            }
+        }
       }
     }
     .post-comments {
@@ -49,13 +58,13 @@
   }
 }
 
-@media only screen and (max-width: 767.69px) {
+@media only screen and (max-width: $mobile-max-width) {
   .post {
     .post-entry {
       display: block;
 
       .post-main {
-        border-bottom: 1px solid $color-5;
+        border-bottom: none;
         margin-bottom: $margin-1;
       }
 

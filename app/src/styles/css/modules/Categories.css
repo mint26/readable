@@ -1,0 +1,8 @@
+.categories {
+  display: inline-flex;
+  border: 1px solid; }
+  .categories li {
+    width: 100%;
+    list-style: none;
+    text-align: center;
+    cursor: pointer; }

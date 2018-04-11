@@ -1,55 +1,88 @@
 import * as actionTypes from "../actiontypes";
-import HttpService from "../../services/http-services";
-
-export const getCategories = () => {
-  return dispatch => {
-    HttpService.getAllCategories().then(categories => {
-      dispatch({
-        type: actionTypes.GET_CATEGORIES,
-        categories: categories
-      });
-    });
-  };
-};
-
-export const getAllPosts = () => {
-  return dispatch => {
-    HttpService.getAllPosts().then(posts => {
-      dispatch({
-        type: actionTypes.GET_POSTS,
-        posts: posts
-      });
-    });
-  };
-};
+import HttpService from "../../services/HttpService";
+import AppService from "../../services/AppService";
+import { AllCategoriesPath } from '../../constants/constants'; 
 
 export const init = () => {
-  return dispatch => {
-    HttpService.getAllCategories().then(categories => {
-      HttpService.getAllPosts().then(posts => {
-        let postObj = {};
-        posts.forEach(post => {
-          postObj[post.id] = post;
-        });
-
+  return dispatch => { 
+    AppService.getAllCategories().then(item => {
         dispatch({
           type: actionTypes.INIT,
-          posts: postObj,
-          categories: categories
+          posts: item.posts,
+          categories: item.categories
         });
       });
-    });
   };
+}
+
+export const sortByVotes = (posts, order) => {
+  return dispatch => {
+    AppService.sortByVotes(posts,order)
+            .then(posts => {
+              dispatch({
+                type: actionTypes.SORT_BY_VOTES,
+                posts: posts
+              });
+            })
+  }
 };
 
-export const getPostComments = postId => {
+export const sortByTimestamp = (posts, order) => {
   return dispatch => {
-    HttpService.getPostComments(postId).then(postComments => {
-      dispatch({
-        type: actionTypes.GET_POST_COMMENTS,
-        comments: postComments,
-        postId: postId
-      });
-    });
-  };
+    AppService.sortByTimestamp(posts,order)
+            .then(posts => {
+              dispatch({
+                type: actionTypes.SORT_BY_VOTES,
+                posts: posts
+              });
+            })
+  }
 };
+
+
+export const getPostByCategory = (category) => {
+  return dispatch => {
+    if (category === AllCategoriesPath){
+      HttpService.getAllPosts().then (posts => {
+        dispatch({
+          type: actionTypes.GET_POSTS_BY_CATEGORY, 
+          posts: posts
+        })
+      })
+    } else {
+      HttpService.getPostsByCategories(category)
+      .then(posts => {
+        dispatch({
+          type: actionTypes.GET_POSTS_BY_CATEGORY, 
+          posts: posts
+        })
+      }); 
+    }
+  }
+}
+
+export const getPostById = (id) => {
+  return dispatch => {
+      AppService.getPostWithCommentsById(id).then(item => {
+        console.log('items', item); 
+        dispatch({
+          type: actionTypes.GET_POST_BY_ID, 
+          selectedPost: item.selectedPost, 
+          comments: item.comments
+        })
+      })
+  }
+}
+
+export const addNewPost = (post) => {
+  return dispatch => {
+    AppService.addNewPost(post).then(result => {
+      if (result) {
+        dispatch ({
+          type: actionTypes.ADD_POST, 
+          toMain: true
+        })
+      }
+    })
+  }
+}

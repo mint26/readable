@@ -1,0 +1,24 @@
+.categories {
+    display: inline-flex;
+    flex-wrap:wrap; 
+    border: 1px solid $color-5;
+    border-radius: $border-radius-1;
+    padding: $padding-1; 
+    width: 100%;
+    box-sizing: border-box;
+    li {
+      list-style: none;
+      text-align: center;
+      cursor: pointer;
+      padding:$padding-1; 
+      box-sizing: border-box;
+    }
+}
+
+
+@media screen and (max-width: $mobile-max-width){
+    .categories {
+        margin-bottom: $margin-1
+    }
+}
+
