@@ -39,7 +39,7 @@ class AppService {
     }
 
     getPostWithCommentsById = (id) => {
-        return HttpService.getPostById(id). then(post => {
+        return HttpService.getPostById(id).then(post => {
             if (post){
                 return HttpService.getCommentsByPostId(id).then(comments => {
                     return Promise.resolve({
@@ -60,6 +60,28 @@ class AppService {
     addNewPost = (post) => {
         return HttpService.addNewPost(post).then(post => {
             if (post){
+                return Promise.resolve(true); 
+            }
+            else {
+                return Promise.resolve(false); 
+            }
+        })
+    }
+
+    deletePost = (id) => {
+        return HttpService.deletePost(id).then(result => {
+            console.log('app service delete post', result); 
+            if (result){
+                return Promise.resolve(true); 
+            }
+            else {
+                return Promise.resolve(false); 
+            }
+        })
+    }
+    deleteComment = (id) => {
+        return HttpService.deleteComment(id).then(result => {
+            if (result){
                 return Promise.resolve(true); 
             }
             else {

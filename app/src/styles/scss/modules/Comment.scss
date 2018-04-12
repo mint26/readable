@@ -5,5 +5,8 @@
     text-align: right;
     padding-top: $padding-1;
     font-size: $font-size-small;
+    .delete-icon{
+      padding-left: $padding-1; 
+    }
   }
 }

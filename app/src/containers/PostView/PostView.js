@@ -19,6 +19,11 @@ class PostView extends Component {
     this.props.history.replace('/edit/' + id); 
   }
 
+  commentDeleteHandler = (id) => {
+    console.log('comment delete handler', id); 
+    this.props.deleteComment(id); 
+  }
+
   render() {
     console.log('props', this.props); 
     let post = null; 
@@ -33,6 +38,7 @@ class PostView extends Component {
                                   id={this.props.selectedPost.id}
                                   onEditHandler={this.editPostHandler}
                                   comments={this.props.comments}
+                                  onCommentDeleteHandler={this.commentDeleteHandler}
                                 /> : 
                                 null; 
 
@@ -52,7 +58,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getPostById: (id) => dispatch(actions.getPostById(id))
+    getPostById: (id) => dispatch(actions.getPostById(id)), 
+    deleteComment: (id) => dispatch(actions.deleteComment(id))
   };
 };
 

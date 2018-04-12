@@ -1,6 +1,5 @@
 import { combineReducers } from "redux";
 import * as actiontypes from "../actiontypes";
-import StateService from "../../services/StateService";
 import UtilService from '../../services/UtilService';
 
 const initialState = {
@@ -35,6 +34,19 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, newState);
     case actiontypes.ADD_POST: 
       return Object.assign({}, state, {toMain: action.toMain});
+
+    case actiontypes.DELETE_POST: 
+      let updatedPosts = [...state.posts]; 
+      updatedPosts = updatedPosts.filter(post => {
+        return post.id != action.id;
+      }); 
+      return Object.assign({}, state, {posts: updatedPosts});
+    case actiontypes.DELETE_COMMENT: 
+      let updatedComments = [...state.comments]; 
+      updatedComments = updatedComments.filter(comment => {
+        return comment.id != action.id;
+      }); 
+      return Object.assign({}, state, {comments: updatedComments});
     default:
       return state;
   }

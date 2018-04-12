@@ -73,6 +73,31 @@ class HttpService {
     }); 
   }
 
+  deletePost = (id) => {
+    let url = API_URL + API_END_POINTS.posts + '/' + id; 
+    return fetch(url, {
+      method:"DELETE", 
+      headers: { 
+        Authorization: 'test',
+        'Content-Type': 'application/json'
+      }
+    }).then(response => {
+      return response.json()
+    }); 
+  }
+
+  deleteComment = (id) => {
+    let url = API_URL + API_END_POINTS.comments + '/' + id; 
+    return fetch(url, {
+      method:"DELETE", 
+      headers: { 
+        Authorization: 'test',
+        'Content-Type': 'application/json'
+      }
+    }).then(response => {
+      return response.json()
+    }); 
+  }
 }
 
 export default new HttpService();

@@ -86,3 +86,29 @@ export const addNewPost = (post) => {
     })
   }
 }
+
+export const deletePost = (id) => {
+  return dispatch => {
+    AppService.deletePost(id).then(result => {
+      if (result) {
+        dispatch ({
+          type: actionTypes.DELETE_POST, 
+          id: id
+        })
+      }
+    })
+  }
+}
+
+export const deleteComment = (id) => {
+  return dispatch => {
+    AppService.deleteComment(id).then(result => {
+      if (result) {
+        dispatch ({
+          type: actionTypes.DELETE_COMMENT, 
+          id: id
+        })
+      }
+    })
+  }
+}

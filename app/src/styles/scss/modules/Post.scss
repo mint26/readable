@@ -54,6 +54,28 @@
       border-left: 1px solid black;
       box-sizing: border-box;
       padding-left: $padding-1;
+
+      .comment-reply-panel{
+        float:right; 
+        margin-top:$margin-1; 
+      }
+    }
+  }
+  .input-comment-panel{
+    border-top: 1px solid black; 
+    padding: $padding-1; 
+    display:inline-block;
+    width: 100%; 
+    form {
+      .input-comment-btn-panel{
+        display:inline-block;
+        text-align:right; 
+        width:100%; 
+        .input-comment-btn {
+          margin: $margin-1 0 $margin-1 $margin-1; 
+          
+        }
+      }
     }
   }
 }
