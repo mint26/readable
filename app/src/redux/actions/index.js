@@ -64,7 +64,6 @@ export const getPostByCategory = (category) => {
 export const getPostById = (id) => {
   return dispatch => {
       AppService.getPostWithCommentsById(id).then(item => {
-        console.log('items', item); 
         dispatch({
           type: actionTypes.GET_POST_BY_ID, 
           selectedPost: item.selectedPost, 
@@ -81,6 +80,20 @@ export const addNewPost = (post) => {
         dispatch ({
           type: actionTypes.ADD_POST, 
           toMain: true
+        })
+      }
+    })
+  }
+}
+
+export const updatePost = (post) => {
+  return dispatch => {
+    AppService.updatePost(post).then(result => {
+      if (result) {
+        dispatch({
+          type: actionTypes.UPDATE_POST, 
+          toMain: true, 
+          updatedPost: post
         })
       }
     })

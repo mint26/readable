@@ -68,6 +68,17 @@ class AppService {
         })
     }
 
+    updatePost = (post) => {
+        return HttpService.updatePost(post).then(post => {
+            if (post){
+                return Promise.resolve(true); 
+            }
+            else {
+                return Promise.resolve(false); 
+            }
+        })
+    }
+
     deletePost = (id) => {
         return HttpService.deletePost(id).then(result => {
             if (result){

@@ -73,6 +73,25 @@ class HttpService {
     }); 
   }
 
+  updatePost = (post) => {
+    let url = API_URL + API_END_POINTS.posts + '/' + post.id;  
+    let updatedContent = {
+      title: post.title, 
+      body: post.body
+    }
+    return fetch(url, {
+      method:"PUT", 
+      body: JSON.stringify(post), 
+      headers: { 
+        Authorization: 'test',
+        'Content-Type': 'application/json'
+      }
+    }).then(response => {
+      console.log('update post http', response);
+      return response.json()
+    }); 
+  }
+
   deletePost = (id) => {
     let url = API_URL + API_END_POINTS.posts + '/' + id; 
     return fetch(url, {

@@ -35,15 +35,20 @@ class EditPostView extends Component {
   }
 
   onSubmit = (title, body) => {
-    let newPost = new Post(DateService.getCurrentDateTimestamp(), title, body, 'Min', 'Udacity', 0, false); 
-    if (newPost) {
-      this.props.addNewPost(newPost); 
+    if (this.props.match && this.props.match.params && this.props.match.params.id){
+      let updatedPost = {...this.props.selectedPost}; 
+      updatedPost.title = title; 
+      updatedPost.body = body;
+      this.props.updatePost(updatedPost);
+    } else {
+      let newPost = new Post(DateService.getCurrentDateTimestamp(), title, body, 'Min', 'Udacity', 0, false); 
+      if (newPost) {
+        this.props.addNewPost(newPost); 
+      }
     }
   }
 
-  render() {
-
-    console.log('post', this.props); 
+  render() { 
     if (this.state.toMain === true) {
       return <Redirect to='/' />
     }
@@ -79,7 +84,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getPostById: (id) => dispatch(actions.getPostById(id)),
-    addNewPost: (post) => dispatch(actions.addNewPost(post))
+    addNewPost: (post) => dispatch(actions.addNewPost(post)), 
+    updatePost: (post) => dispatch(actions.updatePost(post))
   };
 };
 
