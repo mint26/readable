@@ -8,8 +8,8 @@ import DateService from "../../services/DateService";
 
 class EditPostView extends Component {
 
-  constructor(){
-    super(); 
+  constructor(props){
+    super(props); 
     this.state = {
       toMain : false
     }
@@ -35,13 +35,15 @@ class EditPostView extends Component {
   }
 
   onSubmit = (title, body) => {
-    let newPost = new Post(1, DateService.getCurrentDateTimestamp(), title, body, 'Min', 'Udacity', 0, false); 
+    let newPost = new Post(DateService.getCurrentDateTimestamp(), title, body, 'Min', 'Udacity', 0, false); 
     if (newPost) {
       this.props.addNewPost(newPost); 
     }
   }
 
   render() {
+
+    console.log('post', this.props); 
     if (this.state.toMain === true) {
       return <Redirect to='/' />
     }

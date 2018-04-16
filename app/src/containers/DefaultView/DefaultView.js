@@ -61,13 +61,8 @@ class DefaultView extends Component {
         return (
           <Post
             key={post.id}
-            title={post.title}
-            body={post.body}
-            author={post.author}
-            timestamp={post.timestamp}
+            post={post}
             PostType={PostType.Summary}
-            voteScore={post.voteScore}
-            id={post.id}
             onEditHandler={this.editPostHandler}
             selectedPostHandler={this.selectedPostHandler}
             onDeleteHandler = {this.deleteHandler}

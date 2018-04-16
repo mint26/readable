@@ -70,7 +70,6 @@ class AppService {
 
     deletePost = (id) => {
         return HttpService.deletePost(id).then(result => {
-            console.log('app service delete post', result); 
             if (result){
                 return Promise.resolve(true); 
             }
@@ -81,6 +80,16 @@ class AppService {
     }
     deleteComment = (id) => {
         return HttpService.deleteComment(id).then(result => {
+            if (result){
+                return Promise.resolve(true); 
+            }
+            else {
+                return Promise.resolve(false); 
+            }
+        })
+    }
+    addComment = (comment) => {
+        return HttpService.addComment(comment).then(result => {
             if (result){
                 return Promise.resolve(true); 
             }

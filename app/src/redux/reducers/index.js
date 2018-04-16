@@ -47,6 +47,11 @@ const reducer = (state = initialState, action) => {
         return comment.id != action.id;
       }); 
       return Object.assign({}, state, {comments: updatedComments});
+    case actiontypes.ADD_COMMENT: 
+      console.log('add comment reducer', action.comment); 
+      let comments = [...state.comments]; 
+      comments.push(action.comment); 
+      return Object.assign({}, state, {comments: comments}); 
     default:
       return state;
   }

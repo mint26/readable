@@ -112,3 +112,17 @@ export const deleteComment = (id) => {
     })
   }
 }
+
+export const addComment = (comment) => {
+
+  return dispatch => {
+    AppService.addComment(comment).then(result => {
+      if (result) {
+        dispatch ({
+          type: actionTypes.ADD_COMMENT, 
+          comment: comment
+        })
+      }
+    })
+  }
+}

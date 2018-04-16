@@ -98,6 +98,20 @@ class HttpService {
       return response.json()
     }); 
   }
+
+  addComment = (comment) => {
+    let url = API_URL + API_END_POINTS.comments;  
+    return fetch(url, {
+      method:"POST", 
+      body: JSON.stringify(comment), 
+      headers: { 
+        Authorization: 'test',
+        'Content-Type': 'application/json'
+      }
+    }).then(response => {
+      return response.json()
+    }); 
+  }
 }
 
 export default new HttpService();

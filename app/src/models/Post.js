@@ -1,6 +1,7 @@
+import UtilService from '../services/UtilService'; 
+
 class Post {
   constructor(
-    id,
     timestamp,
     title,
     body,
@@ -9,7 +10,7 @@ class Post {
     voteScore,
     deleted
   ) {
-    this.id = id;
+    this.id = UtilService.createUUID();
     this.timestamp = timestamp;
     this.title = title;
     this.body = body;

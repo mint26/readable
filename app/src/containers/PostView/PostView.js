@@ -20,25 +20,23 @@ class PostView extends Component {
   }
 
   commentDeleteHandler = (id) => {
-    console.log('comment delete handler', id); 
     this.props.deleteComment(id); 
   }
 
+  addCommentHandler = (newComment) => {
+    this.props.addComment(newComment); 
+  }
+
   render() {
-    console.log('props', this.props); 
     let post = null; 
     post = this.props.selectedPost ? <Post
                                   key={this.props.selectedPost.id}
-                                  title={this.props.selectedPost.title}
-                                  body={this.props.selectedPost.body}
-                                  author={this.props.selectedPost.author}
-                                  timestamp={this.props.selectedPost.timestamp}
+                                  post={this.props.selectedPost}
                                   postType={PostType.Detailed}
-                                  voteScore={this.props.selectedPost.voteScore}
-                                  id={this.props.selectedPost.id}
                                   onEditHandler={this.editPostHandler}
                                   comments={this.props.comments}
                                   onCommentDeleteHandler={this.commentDeleteHandler}
+                                  onAddCommentHandler={this.addCommentHandler}
                                 /> : 
                                 null; 
 
@@ -59,7 +57,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     getPostById: (id) => dispatch(actions.getPostById(id)), 
-    deleteComment: (id) => dispatch(actions.deleteComment(id))
+    deleteComment: (id) => dispatch(actions.deleteComment(id)), 
+    addComment: (comment) => dispatch(actions.addComment(comment))
   };
 };
 

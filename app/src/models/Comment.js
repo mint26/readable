@@ -1,6 +1,7 @@
+import UtilService from '../services/UtilService'; 
+
 class Comment {
   constructor(
-    id,
     parentId,
     timestamp,
     body,
@@ -9,7 +10,7 @@ class Comment {
     deleted,
     parentDeleted
   ) {
-    this.id = id;
+    this.id = UtilService.createUUID();
     this.parentId = parentId;
     this.timestamp = timestamp;
     this.body = body;

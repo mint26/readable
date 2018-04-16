@@ -1,5 +1,6 @@
 import React, { Component }from "react";
 import Comment from "../Comment/Comment";
+import CommentModel from "../../models/Comment";
 import DateService from "../../services/DateService";
 import { PostType } from "../../constants/constants"; 
 import { Button, Input, Form, FormGroup } from "reactstrap";
@@ -21,7 +22,9 @@ const createCssClassByType = (type) => {
 class Post extends Component {
 
   state = {
-    showInput: false 
+    showInput: false, 
+    commentAuthor: '', 
+    comment: ''
   }
 
   showInputBox = () => {
@@ -32,6 +35,23 @@ class Post extends Component {
     this.setState({showInput: false}); 
   }
 
+  onAddHandler = () => {
+    let newComment = new CommentModel(this.props.post.id, 
+                                DateService.getCurrentDateTimestamp(), this.state.comment, 
+                                this.state.commentAuthor, 0, false, false); 
+    this.props.onAddCommentHandler(newComment); 
+  }
+
+  onCommentAuthorChanged = (e) => {
+    let val = e.currentTarget ? e.currentTarget.value : ''; 
+    this.setState({commentAuthor: val}); 
+  }
+
+  onCommentChanged = (e) => {
+    let val = e.currentTarget ? e.currentTarget.value : ''; 
+    this.setState({comment: val}); 
+  }
+
   renderInputBox = () => {
     if (this.state.showInput) {
       return (
@@ -39,14 +59,14 @@ class Post extends Component {
           <h3>Leave a note</h3>
           <Form>
               <FormGroup>
-                  <Input id="author" placeholder="Name here"></Input>
+                  <Input id="author" placeholder="Name here" value={this.state.commentAuthor} onChange={this.onCommentAuthorChanged}></Input>
               </FormGroup>
               <FormGroup>
-                  <Input type="textarea"></Input>
+                  <Input type="textarea" onChange={this.onCommentChanged} value={this.state.comment}></Input>
               </FormGroup>
               <div className="input-comment-btn-panel">
                 <Button onClick={this.onCancelAdd} className="input-comment-btn">Cancel</Button>
-                <Button className="input-comment-btn">Add</Button>
+                <Button className="input-comment-btn" onClick={this.onAddHandler}>Add</Button>
               </div>
           </Form>
         </div>
@@ -75,22 +95,22 @@ class Post extends Component {
       <div className="col-12 post-header">
         <span className="col-8 header-title" onClick={e => {
             if (this.props.selectedPostHandler)
-            this.props.selectedPostHandler(this.props.id)
+            this.props.selectedPostHandler(this.props.post.id)
           }
-        }>{this.props.title}</span>
-        <span className="col-4 header-vote">{this.props.voteScore}</span>
+        }>{this.props.post.title}</span>
+        <span className="col-4 header-vote">{this.props.post.voteScore}</span>
       </div>
       <div className="col-12 post-entry">
         <div className={`${createCssClassByType(this.props.postType).postMain} post-main`}>
-          {this.props.body}
+          {this.props.post.body}
           <div className="col-12 post-footer">
             Written by
-            <span className="author"> {this.props.author} </span>
+            <span className="author"> {this.props.post.author} </span>
             on {formattedDate}
-            <span className="edit-icon" onClick={ e => {this.props.onEditHandler(this.props.id)}}>
+            <span className="edit-icon" onClick={ e => {this.props.onEditHandler(this.props.post.id)}}>
               <i className="fas fa-edit"></i>
             </span>
-            <span className="delete-icon" onClick={ e => {this.props.onDeleteHandler(this.props.id)}}>
+            <span className="delete-icon" onClick={ e => {this.props.onDeleteHandler(this.props.post.id)}}>
               <i className="fas fa-trash-alt"></i>
             </span>
           </div>
