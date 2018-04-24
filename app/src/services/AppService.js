@@ -102,6 +102,7 @@ class AppService {
     }
     addComment = (comment) => {
         return HttpService.addComment(comment).then(result => {
+            console.log('comments' , comment);
             if (result){
                 return Promise.resolve(true); 
             }

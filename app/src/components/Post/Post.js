@@ -43,7 +43,7 @@ class Post extends Component {
                   }); 
     let newComment = new CommentModel(this.props.post.id, 
                                 DateService.getCurrentDateTimestamp(), this.state.comment, 
-                                this.state.commentAuthor, 0, false, false); 
+                                this.state.commentAuthor, 1, false, false); 
     this.props.onAddCommentHandler(newComment); 
   }
 
