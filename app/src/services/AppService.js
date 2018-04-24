@@ -24,14 +24,14 @@ class AppService {
     }
 
     getAllCategories = () => {
-        return HttpService.getAllCategories().then(categories => {
+        return HttpService.getAllCategories().then(result => {
             return HttpService.getAllPosts().then(posts => {
-                if (categories){
+                if (result && Array.isArray(result.categories)){
                     let allCategory = new Category('all', 'all'); 
-                    categories.unshift(allCategory); 
+                    result.categories.unshift(allCategory); 
                 }
                 return Promise.resolve({
-                            categories: categories, 
+                            categories: result.categories, 
                             posts: posts
                         });
             });
