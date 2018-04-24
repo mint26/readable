@@ -41,9 +41,11 @@ const reducer = (state = initialState, action) => {
     case actiontypes.UPDATE_POST: 
 
       let posts = [...state.posts]; 
-      let post = posts.filter(item => { return item.id === action.updatedPost.id}); 
-      post = action.updatedPost; 
-      return Object.assign({}, state, {posts: posts}); 
+      let post = posts.find(item => { return item.id === action.updatedPost.id}); 
+      if (post) {
+        post = action.updatedPost; 
+      }
+      return Object.assign({}, state, {posts: posts, toMain: action.toMain}); 
 
     case actiontypes.DELETE_POST: 
       let updatedPosts = [...state.posts]; 
@@ -65,6 +67,7 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {comments: comments}); 
 
     case actiontypes.UPDATE_POST_VOTE: 
+
       let postList = [...state.posts]; 
       let updatedPost = postList.find(post => {
         return post.id === action.post.id; 

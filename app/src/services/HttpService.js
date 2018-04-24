@@ -81,13 +81,12 @@ class HttpService {
     }
     return fetch(url, {
       method:"PUT", 
-      body: JSON.stringify(post), 
+      body: JSON.stringify(updatedContent), 
       headers: { 
         Authorization: 'test',
         'Content-Type': 'application/json'
       }
     }).then(response => {
-      console.log('update post http', response);
       return response.json()
     }); 
   }

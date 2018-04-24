@@ -91,12 +91,12 @@ export const addNewPost = (post) => {
 
 export const updatePost = (post) => {
   return dispatch => {
-    AppService.updatePost(post).then(result => {
-      if (result) {
+    AppService.updatePost(post).then(updatedPost => {
+      if (updatedPost) {
         dispatch({
           type: actionTypes.UPDATE_POST, 
           toMain: true, 
-          updatedPost: post
+          updatedPost: updatedPost
         })
       }
     })

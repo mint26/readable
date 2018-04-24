@@ -72,7 +72,7 @@ class AppService {
     updatePost = (post) => {
         return HttpService.updatePost(post).then(post => {
             if (post){
-                return Promise.resolve(true); 
+                return Promise.resolve(post); 
             }
             else {
                 return Promise.resolve(false); 
