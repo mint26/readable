@@ -58,7 +58,6 @@ class Post extends Component {
   }
 
   onUpVoteHandler = () => {
-    console.log('id', this.props.post.id); 
     if (this.props.onUpVoteHandler)
       this.props.onUpVoteHandler(this.props.post.id); 
   }

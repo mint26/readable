@@ -98,7 +98,6 @@ class DefaultView extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log('state', state); 
   return {
     categories: state.reducer.categories,
     posts: state.reducer.posts
