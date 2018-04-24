@@ -131,6 +131,42 @@ class HttpService {
       return response.json()
     }); 
   }
+
+  updatePostVote = (type, id) => {
+    let url = API_URL + API_END_POINTS.posts + '/' + id; 
+    let payload = {
+      option: type
+    };
+
+    return fetch(url, {
+      method:"POST", 
+      body: JSON.stringify(payload),
+      headers: { 
+        Authorization: 'test',
+        'Content-Type': 'application/json'
+      }
+    }).then(response => {
+      return response.json()
+    }); 
+  }
+
+  updateCommentVote = (type, id) => {
+    let url = API_URL + API_END_POINTS.comments + '/' + id; 
+    let payload = {
+      option: type
+    };
+    
+    return fetch(url, {
+      method:"POST", 
+      body: JSON.stringify(payload),
+      headers: { 
+        Authorization: 'test',
+        'Content-Type': 'application/json'
+      }
+    }).then(response => {
+      return response.json()
+    }); 
+  }
 }
 
 export default new HttpService();

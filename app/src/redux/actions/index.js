@@ -70,6 +70,9 @@ export const getPostById = (id) => {
           comments: item.comments
         })
       })
+      .catch(err => {
+        return Promise.resolve(err); 
+      })
   }
 }
 
@@ -139,3 +142,29 @@ export const addComment = (comment) => {
     })
   }
 }
+
+export const updatePostVote = (type, id) => {
+  return dispatch => {
+    AppService.updatePostVote(type, id).then(post => {
+      if (post) {
+        return dispatch ({
+          type: actionTypes.UPDATE_POST_VOTE,
+          post: post
+        })
+      }
+    })
+  }
+}; 
+
+export const updateCommentVote = (type, id) => {
+  return dispatch => {
+    AppService.updateCommentVote(type, id).then(comment => {
+      if (comment) {
+        return dispatch ({
+          type: actionTypes.UPDATE_COMMENT_VOTE,
+          comment: comment
+        })
+      }
+    })
+  }
+}; 

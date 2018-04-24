@@ -36,6 +36,11 @@ class Post extends Component {
   }
 
   onAddHandler = () => {
+    this.setState({
+                  showInput: false, 
+                  commentAuthor:'',
+                  comment:''
+                  }); 
     let newComment = new CommentModel(this.props.post.id, 
                                 DateService.getCurrentDateTimestamp(), this.state.comment, 
                                 this.state.commentAuthor, 0, false, false); 
@@ -50,6 +55,17 @@ class Post extends Component {
   onCommentChanged = (e) => {
     let val = e.currentTarget ? e.currentTarget.value : ''; 
     this.setState({comment: val}); 
+  }
+
+  onUpVoteHandler = () => {
+    console.log('id', this.props.post.id); 
+    if (this.props.onUpVoteHandler)
+      this.props.onUpVoteHandler(this.props.post.id); 
+  }
+
+  onDownVoteHandler = () => {
+    if (this.props.onDownVoteHandler)
+      this.props.onDownVoteHandler(this.props.post.id); 
   }
 
   renderInputBox = () => {
@@ -80,7 +96,8 @@ class Post extends Component {
     let formattedDate = DateService.formatDate(this.props.timestamp);
     let comments = this.props.comments ? this.props.comments.map((comment) => {
     let commentedDate = DateService.formatDate(comment.timestamp);
-    return <Comment key={comment.id} id={comment.id} content={comment.body} author={comment.author} commentedDate={commentedDate} onDeleteHandler={this.props.onCommentDeleteHandler}/>
+    return <Comment key={comment.id} comment={comment} onDeleteHandler={this.props.onCommentDeleteHandler} 
+    onUpVoteComment={this.props.onUpVoteComment} onDownVoteComment={this.props.onDownVoteComment}/>
   }) : null; 
 
     let showAddComment = !this.state.showInput? (          
@@ -98,7 +115,11 @@ class Post extends Component {
             this.props.selectedPostHandler(this.props.post.id)
           }
         }>{this.props.post.title}</span>
-        <span className="col-4 header-vote">{this.props.post.voteScore}</span>
+        <span className="col-4 header-vote">
+          <i className="far fa-thumbs-up" onClick={this.onUpVoteHandler}/>
+          <i className="far fa-thumbs-down" onClick={this.onDownVoteHandler}/>
+          {this.props.post.voteScore}
+        </span>
       </div>
       <div className="col-12 post-entry">
         <div className={`${createCssClassByType(this.props.postType).postMain} post-main`}>

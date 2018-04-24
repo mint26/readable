@@ -12,6 +12,10 @@
       cursor: pointer;
       padding:$padding-1; 
       box-sizing: border-box;
+
+      &:hover{
+        color:lightgrey; 
+       }   
     }
 }
 

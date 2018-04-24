@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { PostType } from "../../constants/constants"; 
 import Post from "../../components/Post/Post";
 import { connect } from "react-redux";
 import * as actions from "../../redux/actions";
-
+import { PostType, VoteType } from "../../constants/constants"; 
 class PostView extends Component {
 
   componentDidMount(){
@@ -27,6 +26,18 @@ class PostView extends Component {
     this.props.addComment(newComment); 
   }
 
+  clickBackHandler = () => {
+    this.props.history.goBack(); 
+  }
+
+  onUpVoteComment = (id) => {
+    this.props.updateCommentVote(VoteType.UpVote, id); 
+  }
+
+  onDownVoteComment = (id) => {
+    this.props.updateCommentVote(VoteType.DownVote, id); 
+  }
+
   render() {
     let post = null; 
     post = this.props.selectedPost ? <Post
@@ -37,11 +48,16 @@ class PostView extends Component {
                                   comments={this.props.comments}
                                   onCommentDeleteHandler={this.commentDeleteHandler}
                                   onAddCommentHandler={this.addCommentHandler}
+                                  onUpVoteComment={this.onUpVoteComment}
+                                  onDownVoteComment={this.onDownVoteComment}
                                 /> : 
                                 null; 
 
     return <div className="post-view">
               {post}
+              <div className='post-back-panel' onClick={this.clickBackHandler}>
+                <i className="fas fa-chevron-left"></i> Back
+              </div>
           </div>;
   }
 }
@@ -58,7 +74,8 @@ const mapDispatchToProps = dispatch => {
   return {
     getPostById: (id) => dispatch(actions.getPostById(id)), 
     deleteComment: (id) => dispatch(actions.deleteComment(id)), 
-    addComment: (comment) => dispatch(actions.addComment(comment))
+    addComment: (comment) => dispatch(actions.addComment(comment)),
+    updateCommentVote : (type, id) => dispatch(actions.updateCommentVote(type, id))
   };
 };
 

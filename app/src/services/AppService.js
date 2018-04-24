@@ -39,22 +39,23 @@ class AppService {
     }
 
     getPostWithCommentsById = (id) => {
-        return HttpService.getPostById(id).then(post => {
-            if (post){
-                return HttpService.getCommentsByPostId(id).then(comments => {
-                    return Promise.resolve({
-                        selectedPost : post, 
-                        comments: comments? comments: []
+        if (id){
+            return HttpService.getPostById(id).then(post => {
+                if (post){
+                    return HttpService.getCommentsByPostId(id).then(comments => {
+                        return Promise.resolve({
+                            selectedPost : post, 
+                            comments: comments? comments: []
+                        })
                     })
-                })
-            }
-            else{
-                return Promise.resolve({
-                    selectedPost : {}, 
-                    comments: []
-                })
-            }
-        })
+                }
+            });
+        } else {
+            return Promise.resolve({
+                selectedPost : {}, 
+                comments: []
+            });
+        }
     }
 
     addNewPost = (post) => {
@@ -105,6 +106,26 @@ class AppService {
                 return Promise.resolve(true); 
             }
             else {
+                return Promise.resolve(false); 
+            }
+        })
+    }
+
+    updatePostVote = (type, id) => {
+        return HttpService.updatePostVote(type, id).then(result => {
+            if (result) {
+                return Promise.resolve(result); 
+            } else {
+                return Promise.resolve(false); 
+            }
+        })
+    }
+
+    updateCommentVote = (type, id) => {
+        return HttpService.updateCommentVote(type, id).then(result => {
+            if (result) {
+                return Promise.resolve(result); 
+            } else {
                 return Promise.resolve(false); 
             }
         })

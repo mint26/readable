@@ -16,18 +16,15 @@ class EditPostView extends Component {
   }
 
   componentDidMount(){
-    if (this.props.match && this.props.match.params && this.props.match.params.id){
       //Init existing post; 
       let id = this.props.match.params.id; 
       this.props.getPostById(id); 
-
-    }
   }
 
   componentDidUpdate(){
-    // if (this.props.toMain){
-    //   this.setState({toMain: true}); 
-    // }
+    if (this.props.toMain){
+      this.setState({toMain: true}); 
+    }
   }
 
   onCancel = () => {

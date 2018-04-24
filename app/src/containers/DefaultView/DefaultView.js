@@ -4,7 +4,7 @@ import * as actions from "../../redux/actions";
 import Categories from "../../components/Categories/Categories";
 import Post from "../../components/Post/Post";
 import Controls from "../../components/Controls/Controls";
-import { PostType } from "../../constants/constants"; 
+import { PostType, VoteType } from "../../constants/constants"; 
 
 class DefaultView extends Component {
 
@@ -32,6 +32,14 @@ class DefaultView extends Component {
     this.setState(prevState => {
       return {ascTimeOrder: !prevState.ascTimeOrder}
     });
+  }
+
+  onUpVoteHandler = (id) => {
+    this.props.updatePostVote(VoteType.UpVote, id);
+  }
+
+  onDownVoteHandler = (id) => {
+    this.props.updatePostVote(VoteType.DownVote, id);
   }
   
   getPostByCategory = (category) => {
@@ -66,6 +74,8 @@ class DefaultView extends Component {
             onEditHandler={this.editPostHandler}
             selectedPostHandler={this.selectedPostHandler}
             onDeleteHandler = {this.deleteHandler}
+            onUpVoteHandler = {this.onUpVoteHandler}
+            onDownVoteHandler = {this.onDownVoteHandler}
           />
         );
       });
@@ -101,7 +111,8 @@ const mapDispatchToProps = dispatch => {
     sortByTimestamp : (posts, order) => dispatch(actions.sortByTimestamp(posts,order)), 
     sortByVote: (posts,order) => dispatch(actions.sortByVotes(posts,order)), 
     getPostByCategory: (category) => dispatch(actions.getPostByCategory(category)), 
-    deletePost : (id) => dispatch(actions.deletePost(id))
+    deletePost : (id) => dispatch(actions.deletePost(id)), 
+    updatePostVote : (type, id) => dispatch(actions.updatePostVote(type, id))
   };
 };
 

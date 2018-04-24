@@ -4,3 +4,8 @@ export const PostType = {
 }
 
 export const AllCategoriesPath = "all";
+
+export const VoteType = {
+    UpVote : "upVote", 
+    DownVote : "downVote"
+}

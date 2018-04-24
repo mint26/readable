@@ -15,7 +15,8 @@ const reducer = (state = initialState, action) => {
     case actiontypes.INIT:
       return Object.assign({}, state, {
         categories: action.categories,
-        posts: action.posts
+        posts: action.posts, 
+        toMain: false
       });
 
     case actiontypes.SORT_BY_VOTES:
@@ -63,6 +64,24 @@ const reducer = (state = initialState, action) => {
       comments.push(action.comment); 
       return Object.assign({}, state, {comments: comments}); 
 
+    case actiontypes.UPDATE_POST_VOTE: 
+      let postList = [...state.posts]; 
+      let updatedPost = postList.find(post => {
+        return post.id === action.post.id; 
+      });
+      if (updatedPost){
+        updatedPost.voteScore = action.post.voteScore; 
+      }
+      return Object.assign({}, state, {posts: postList});
+    case actiontypes.UPDATE_COMMENT_VOTE: 
+      let commentList = [...state.comments]; 
+      let updatedComment = commentList.find(comment => {
+        return comment.id === action.comment.id; 
+      });
+      if (updatedComment){
+        updatedComment.voteScore = action.comment.voteScore; 
+      }
+      return Object.assign({}, state, {comments: commentList});
     default:
       return state;
   }

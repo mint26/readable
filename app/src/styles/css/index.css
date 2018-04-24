@@ -59,9 +59,16 @@ header {
       padding: 0;
       font-family: "Playfair Display", Georgia, "Times New Roman", serif;
       cursor: pointer; }
+      .post .post-header .header-title:hover {
+        color: lightgrey; }
     .post .post-header .header-vote {
       text-align: right;
       width: 100%; }
+      .post .post-header .header-vote i {
+        padding: 0 0.5em;
+        cursor: pointer; }
+        .post .post-header .header-vote i:hover {
+          color: lightgrey; }
   .post .post-entry {
     padding: 0;
     display: inline-flex;
@@ -76,10 +83,18 @@ header {
         font-weight: bold;
         font-style: italic; }
       .post .post-entry .post-main .post-footer .edit-icon {
-        padding: 1em; }
+        padding: 1em;
+        cursor: pointer; }
+        .post .post-entry .post-main .post-footer .edit-icon:hover {
+          color: lightgrey; }
         .post .post-entry .post-main .post-footer .edit-icon img {
           width: 20px;
           height: 20px; }
+      .post .post-entry .post-main .post-footer .delete-icon {
+        padding: 1em;
+        cursor: pointer; }
+        .post .post-entry .post-main .post-footer .delete-icon:hover {
+          color: lightgrey; }
     .post .post-entry .post-comments {
       border-left: 1px solid black;
       box-sizing: border-box;
@@ -108,6 +123,14 @@ header {
     .post .post-entry .post-comments {
       border: none; } }
 
+.comment .comment-header {
+  text-align: right; }
+  .comment .comment-header i {
+    padding: 0 0.5em;
+    cursor: pointer; }
+    .comment .comment-header i:hover {
+      color: lightgray; }
+
 .comment .comment-footer {
   margin: 1em 0;
   display: block;
@@ -115,7 +138,10 @@ header {
   padding-top: 1em;
   font-size: 0.8em; }
   .comment .comment-footer .delete-icon {
-    padding-left: 1em; }
+    padding-left: 1em;
+    cursor: pointer; }
+    .comment .comment-footer .delete-icon:hover {
+      color: lightgrey; }
 
 .controls {
   display: inline-block;
@@ -128,6 +154,8 @@ header {
     cursor: pointer;
     font-size: 20px;
     padding-top: 3px; }
+    .controls > div:hover {
+      color: lightgrey; }
   .controls button {
     float: right;
     margin: 0 0 0 1em; }
@@ -146,6 +174,8 @@ header {
     cursor: pointer;
     padding: 1em;
     box-sizing: border-box; }
+    .categories li:hover {
+      color: lightgrey; }
 
 @media screen and (max-width: 767.69px) {
   .categories {
@@ -165,3 +195,12 @@ header {
 
 .post-view {
   padding: 1em 0; }
+  .post-view .post .post-header .header-title {
+    cursor: default; }
+    .post-view .post .post-header .header-title:hover {
+      color: black; }
+
+.post-back-panel {
+  cursor: pointer; }
+  .post-back-panel:hover {
+    color: lightgrey; }

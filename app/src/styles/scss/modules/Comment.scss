@@ -1,4 +1,14 @@
 .comment {
+  .comment-header{
+    text-align: right; 
+    i {
+      padding: 0 $padding-1/2;
+      cursor:pointer;
+      &:hover{
+        color:lightgray; 
+      }
+    }
+  }
   .comment-footer {
     margin: $margin-1 0;
     display: block;
@@ -7,6 +17,10 @@
     font-size: $font-size-small;
     .delete-icon{
       padding-left: $padding-1; 
+      cursor:pointer;
+      &:hover{
+        color:lightgrey; 
+      }
     }
   }
 }
