@@ -3,15 +3,25 @@ import HttpService from "../../services/HttpService";
 import AppService from "../../services/AppService";
 import { AllCategoriesPath } from '../../constants/constants'; 
 
-export const init = () => {
+export const init = (category) => {
   return dispatch => { 
-    AppService.getAllCategories().then(item => {
+    if (category && category.trim().toLowerCase() !== 'all') {
+      AppService.getPostsByCategory(category).then(item => {
+        dispatch({
+          type: actionTypes.INIT,
+          posts: item.posts,
+          categories: item.categories
+        });
+      })
+    } else {
+      AppService.getAllCategories().then(item => {
         dispatch({
           type: actionTypes.INIT,
           posts: item.posts,
           categories: item.categories
         });
       });
+    }
   };
 }
 
@@ -112,6 +122,21 @@ export const deletePost = (id) => {
           id: id
         })
       }
+    })
+  }
+}
+
+export const deleteSelectedPost = (id) => {
+  return dispatch => {
+    return AppService.deletePost(id).then(result => {
+      if (result) {
+        console.log('aciton result', result); 
+        dispatch ({
+          type: actionTypes.DELETE_SELECTED_POST, 
+          id: id
+        });
+      }
+      return null; 
     })
   }
 }

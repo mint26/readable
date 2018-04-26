@@ -38,6 +38,21 @@ class AppService {
         });
     }
 
+    getPostsByCategory = (category) => {
+        return HttpService.getAllCategories().then(result => {
+            return HttpService.getPostsByCategories(category).then(posts => {
+                if (result && Array.isArray(result.categories)){
+                    let allCategory = new Category('all', 'all'); 
+                    result.categories.unshift(allCategory); 
+                }
+                return Promise.resolve({
+                            categories: result.categories, 
+                            posts: posts
+                        });
+            });
+        });
+    }
+
     getPostWithCommentsById = (id) => {
         if (id){
             return HttpService.getPostById(id).then(post => {
@@ -90,6 +105,7 @@ class AppService {
             }
         })
     }
+
     deleteComment = (id) => {
         return HttpService.deleteComment(id).then(result => {
             if (result){

@@ -9,9 +9,9 @@ class Main extends Component {
     return (
       <div className="app-main-content">
         <Switch>
-          <Route exact path="/" component={DefaultView} />
-          <Route path="/post/:id?" component={PostView} />
-          <Route path="/edit/:id?" component={EditPostView} />
+          <Route exact path="/:category?" component={DefaultView} />
+          <Route path="/:category/post/:id?" component={PostView} />
+          <Route path="/:category/edit/:id?" component={EditPostView} />
         </Switch>
       </div>
     );

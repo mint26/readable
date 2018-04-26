@@ -14,12 +14,25 @@ const interpolateURL = (url, param) => {
   return newURL;
 };
 
+let token = localStorage.token
+
+if (!token) {
+  token = localStorage.token = Math.random().toString(36).substr(-8)
+}
+
+const headers = {
+  'Accept': 'application/json',
+  'Content-Type': 'application/json',
+  'Authorization': token,
+}
+
+
 class HttpService {
   getAllCategories = () => {
     let url = API_URL + API_END_POINTS.categories;
     return fetch(url, {
       method: "GET",
-      headers: { Authorization: "whatever-you-want" }
+      headers: headers
     }).then(response => response.json());
   };
 
@@ -27,7 +40,7 @@ class HttpService {
     let url = API_URL + API_END_POINTS.posts;
     return fetch(url, {
       method: "GET",
-      headers: { Authorization: "whatever-you-want" }
+      headers: headers
     }).then(response => response.json());
   };
 
@@ -37,7 +50,7 @@ class HttpService {
 
     return fetch(url, {
       method:"GET", 
-      headers: { Authorization: "whatever-you-want"}
+      headers: headers
     }).then(response => response.json()); 
   }
 
@@ -46,7 +59,7 @@ class HttpService {
 
     return fetch(url, {
       method:"GET", 
-      headers: { Authorization: "whatever-you-want"}
+      headers: headers
     }).then(response => response.json()); 
   }
 
@@ -55,7 +68,7 @@ class HttpService {
 
     return fetch(url, {
       method:"GET", 
-      headers: { Authorization: "whatever-you-want"}
+      headers: headers
     }).then(response => response.json()); 
   }
 
@@ -64,10 +77,7 @@ class HttpService {
     return fetch(url, {
       method:"POST", 
       body: JSON.stringify(post), 
-      headers: { 
-        Authorization: 'test',
-        'Content-Type': 'application/json'
-      }
+      headers: headers
     }).then(response => {
       return response.json()
     }); 
@@ -82,10 +92,7 @@ class HttpService {
     return fetch(url, {
       method:"PUT", 
       body: JSON.stringify(updatedContent), 
-      headers: { 
-        Authorization: 'test',
-        'Content-Type': 'application/json'
-      }
+      headers: headers
     }).then(response => {
       return response.json()
     }); 
@@ -95,10 +102,7 @@ class HttpService {
     let url = API_URL + API_END_POINTS.posts + '/' + id; 
     return fetch(url, {
       method:"DELETE", 
-      headers: { 
-        Authorization: 'test',
-        'Content-Type': 'application/json'
-      }
+      headers: headers
     }).then(response => {
       return response.json()
     }); 
@@ -108,10 +112,7 @@ class HttpService {
     let url = API_URL + API_END_POINTS.comments + '/' + id; 
     return fetch(url, {
       method:"DELETE", 
-      headers: { 
-        Authorization: 'test',
-        'Content-Type': 'application/json'
-      }
+      headers: headers
     }).then(response => {
       return response.json()
     }); 
@@ -122,10 +123,7 @@ class HttpService {
     return fetch(url, {
       method:"POST", 
       body: JSON.stringify(comment), 
-      headers: { 
-        Authorization: 'test',
-        'Content-Type': 'application/json'
-      }
+      headers: headers
     }).then(response => {
       return response.json()
     }); 
@@ -140,10 +138,7 @@ class HttpService {
     return fetch(url, {
       method:"POST", 
       body: JSON.stringify(payload),
-      headers: { 
-        Authorization: 'test',
-        'Content-Type': 'application/json'
-      }
+      headers: headers
     }).then(response => {
       return response.json()
     }); 
@@ -158,10 +153,7 @@ class HttpService {
     return fetch(url, {
       method:"POST", 
       body: JSON.stringify(payload),
-      headers: { 
-        Authorization: 'test',
-        'Content-Type': 'application/json'
-      }
+      headers: headers
     }).then(response => {
       return response.json()
     }); 

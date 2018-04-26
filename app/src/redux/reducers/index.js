@@ -54,6 +54,15 @@ const reducer = (state = initialState, action) => {
       }); 
       return Object.assign({}, state, {posts: updatedPosts});
 
+    case actiontypes.DELETE_SELECTED_POST: 
+      console.log("IN HERE"); 
+      let ss = [...state.posts]; 
+      ss = ss.filter(post => {
+        return post.id !== action.id;
+      }); 
+      console.log('deleted selected reducer', state,{posts: ss, selectedPost: null} ); 
+      return Object.assign({}, state, {posts: ss, selectedPost: null});
+    
     case actiontypes.DELETE_COMMENT: 
       let updatedComments = [...state.comments]; 
       updatedComments = updatedComments.filter(comment => {
@@ -69,13 +78,20 @@ const reducer = (state = initialState, action) => {
     case actiontypes.UPDATE_POST_VOTE: 
 
       let postList = [...state.posts]; 
+      let updatedState; 
       let updatedPost = postList.find(post => {
         return post.id === action.post.id; 
       });
       if (updatedPost){
         updatedPost.voteScore = action.post.voteScore; 
       }
-      return Object.assign({}, state, {posts: postList});
+      updatedState = {posts: postList}; 
+      if (state.selectedPost) {
+        let newPost = {...state.selectedPost}; 
+        newPost.voteScore = action.post.voteScore; 
+        updatedState.selectedPost = newPost; 
+      }
+      return Object.assign({}, state, updatedState);
     case actiontypes.UPDATE_COMMENT_VOTE: 
       let commentList = [...state.comments]; 
       let updatedComment = commentList.find(comment => {

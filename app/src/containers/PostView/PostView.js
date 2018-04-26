@@ -5,17 +5,22 @@ import * as actions from "../../redux/actions";
 import { PostType, VoteType } from "../../constants/constants"; 
 class PostView extends Component {
 
+  state = {
+    isDeleted : false, 
+  }
   componentDidMount(){
     if (this.props.match && this.props.match.params && this.props.match.params.id){
       //Init existing post; 
       let id = this.props.match.params.id; 
+
       this.props.getPostById(id); 
 
     }
   }
 
   editPostHandler = (id) => {
-    this.props.history.replace('/edit/' + id); 
+    let category = this.props.match.params.category; 
+    this.props.history.replace(`/${category}/edit/${id}`, this.props.match.path); 
   }
 
   commentDeleteHandler = (id) => {
@@ -38,20 +43,41 @@ class PostView extends Component {
     this.props.updateCommentVote(VoteType.DownVote, id); 
   }
 
+  onUpVoteHandler = (id) => {
+    this.props.updatePostVote(VoteType.UpVote, id);
+  }
+
+  onDownVoteHandler = (id) => {
+    this.props.updatePostVote(VoteType.DownVote, id);
+  }
+
+  deleteHandler = (id) => {
+    this.props.deleteSelectedPost(id)
+            .then(result => {
+              this.setState({isDeleted: true}); 
+            })
+    
+  }
+
+
   render() {
+    console.log('render post view' , this.state, this.props); 
     let post = null; 
     post = this.props.selectedPost ? <Post
                                   key={this.props.selectedPost.id}
                                   post={this.props.selectedPost}
                                   postType={PostType.Detailed}
+                                  onDeleteHandler = {this.deleteHandler}
                                   onEditHandler={this.editPostHandler}
                                   comments={this.props.comments}
                                   onCommentDeleteHandler={this.commentDeleteHandler}
                                   onAddCommentHandler={this.addCommentHandler}
+                                  onUpVoteHandler = {this.onUpVoteHandler}
+                                  onDownVoteHandler = {this.onDownVoteHandler}
                                   onUpVoteComment={this.onUpVoteComment}
                                   onDownVoteComment={this.onDownVoteComment}
                                 /> : 
-                                null; 
+                                this.state.isDeleted ? <span>This post has been successfully deleted. </span> : null; 
 
     return <div className="post-view">
               {post}
@@ -75,7 +101,9 @@ const mapDispatchToProps = dispatch => {
     getPostById: (id) => dispatch(actions.getPostById(id)), 
     deleteComment: (id) => dispatch(actions.deleteComment(id)), 
     addComment: (comment) => dispatch(actions.addComment(comment)),
-    updateCommentVote : (type, id) => dispatch(actions.updateCommentVote(type, id))
+    updateCommentVote : (type, id) => dispatch(actions.updateCommentVote(type, id)),
+    updatePostVote : (type, id) => dispatch(actions.updatePostVote(type, id)),
+    deleteSelectedPost : (id) => dispatch(actions.deleteSelectedPost(id)), 
   };
 };
 

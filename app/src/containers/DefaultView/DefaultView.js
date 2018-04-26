@@ -12,12 +12,21 @@ class DefaultView extends Component {
     super(); 
     this.state = {
       ascVoteOrder : true, 
-      ascTimeOrder : true
+      ascTimeOrder : true, 
+      currentCategory: 'all'
     }
   }
 
+  init = () => {
+    let category = this.props.match.params.category; 
+    this.props.init(category);
+  }
   componentDidMount() {
-    this.props.init();
+    this.init(); 
+  }
+
+  componentDidUpdate(){
+    this.init(); 
   }
   
   sortByVoteHandler = () => {
@@ -43,19 +52,21 @@ class DefaultView extends Component {
   }
   
   getPostByCategory = (category) => {
-    this.props.getPostByCategory(category); 
+    //this.props.getPostByCategory(category); 
+    this.props.history.push('/' + category); 
+    this.setState({currentCategory: category}); 
   }
 
   addPostHandler = () => {
-    this.props.history.push('/edit')
+    this.props.history.push(`/${this.state.currentCategory}/edit`); 
   }
 
   editPostHandler = (id) => {
-    this.props.history.push('/edit/' + id); 
+    this.props.history.push(`/${this.state.currentCategory}/edit/${id}`); 
   }
 
   selectedPostHandler = (id) => {
-    this.props.history.push('/post/' + id); 
+    this.props.history.push(`/${this.state.currentCategory}/post/${id}`); 
   }
 
   deleteHandler = (id) => {
@@ -106,7 +117,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    init: () => dispatch(actions.init()), 
+    init: (category) => dispatch(actions.init(category)), 
     sortByTimestamp : (posts, order) => dispatch(actions.sortByTimestamp(posts,order)), 
     sortByVote: (posts,order) => dispatch(actions.sortByVotes(posts,order)), 
     getPostByCategory: (category) => dispatch(actions.getPostByCategory(category)), 
