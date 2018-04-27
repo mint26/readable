@@ -129,9 +129,8 @@ export const deletePost = (id) => {
 export const deleteSelectedPost = (id) => {
   return dispatch => {
     return AppService.deletePost(id).then(result => {
-      if (result) {
-        console.log('aciton result', result); 
-        dispatch ({
+      if (result){
+        return dispatch ({
           type: actionTypes.DELETE_SELECTED_POST, 
           id: id
         });

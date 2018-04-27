@@ -76,25 +76,28 @@ header {
     .post .post-entry .post-main .post-footer {
       margin: 1em 0;
       display: block;
-      text-align: right;
       padding-top: 1em;
       font-size: 0.8em; }
-      .post .post-entry .post-main .post-footer .author {
-        font-weight: bold;
-        font-style: italic; }
-      .post .post-entry .post-main .post-footer .edit-icon {
-        padding: 1em;
-        cursor: pointer; }
-        .post .post-entry .post-main .post-footer .edit-icon:hover {
-          color: lightgrey; }
-        .post .post-entry .post-main .post-footer .edit-icon img {
-          width: 20px;
-          height: 20px; }
-      .post .post-entry .post-main .post-footer .delete-icon {
-        padding: 1em;
-        cursor: pointer; }
-        .post .post-entry .post-main .post-footer .delete-icon:hover {
-          color: lightgrey; }
+      .post .post-entry .post-main .post-footer .comment-count {
+        float: left; }
+      .post .post-entry .post-main .post-footer .right-panel {
+        float: right; }
+        .post .post-entry .post-main .post-footer .right-panel .author {
+          font-weight: bold;
+          font-style: italic; }
+        .post .post-entry .post-main .post-footer .right-panel .edit-icon {
+          padding: 1em;
+          cursor: pointer; }
+          .post .post-entry .post-main .post-footer .right-panel .edit-icon:hover {
+            color: lightgrey; }
+          .post .post-entry .post-main .post-footer .right-panel .edit-icon img {
+            width: 20px;
+            height: 20px; }
+        .post .post-entry .post-main .post-footer .right-panel .delete-icon {
+          padding: 1em;
+          cursor: pointer; }
+          .post .post-entry .post-main .post-footer .right-panel .delete-icon:hover {
+            color: lightgrey; }
     .post .post-entry .post-comments {
       border-left: 1px solid black;
       box-sizing: border-box;
@@ -199,6 +202,11 @@ header {
     cursor: default; }
     .post-view .post .post-header .header-title:hover {
       color: black; }
+  .post-view .msg-box-panel {
+    border: 1px solid #343a40;
+    border-radius: 10px;
+    padding: 1em;
+    margin-bottom: 1em; }
 
 .post-back-panel {
   cursor: pointer; }

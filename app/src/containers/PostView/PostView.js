@@ -3,6 +3,10 @@ import Post from "../../components/Post/Post";
 import { connect } from "react-redux";
 import * as actions from "../../redux/actions";
 import { PostType, VoteType } from "../../constants/constants"; 
+
+const POST_DELETED = "This post has been successfully deleted"; 
+const POST_ERROR = "This post is no longer exists";
+
 class PostView extends Component {
 
   state = {
@@ -59,11 +63,17 @@ class PostView extends Component {
     
   }
 
+  generateDeletedJSX = (msg) => {
+    return (
+      <div className="col-12 msg-box-panel">
+        <span className="msg">{msg}</span> 
+      </div>
+    )
+  }
 
   render() {
-    console.log('render post view' , this.state, this.props); 
     let post = null; 
-    post = this.props.selectedPost ? <Post
+    post = this.props.selectedPost && Object.keys(this.props.selectedPost).length > 0 ? <Post
                                   key={this.props.selectedPost.id}
                                   post={this.props.selectedPost}
                                   postType={PostType.Detailed}
@@ -77,7 +87,7 @@ class PostView extends Component {
                                   onUpVoteComment={this.onUpVoteComment}
                                   onDownVoteComment={this.onDownVoteComment}
                                 /> : 
-                                this.state.isDeleted ? <span>This post has been successfully deleted. </span> : null; 
+                                this.state.isDeleted ? this.generateDeletedJSX(POST_DELETED) : this.generateDeletedJSX(POST_ERROR); 
 
     return <div className="post-view">
               {post}
@@ -89,6 +99,7 @@ class PostView extends Component {
 }
 
 const mapStateToProps = state => {
+  console.log('state' , state); 
   return {
     selectedPost: state.reducer.selectedPost, 
     comments: state.reducer.comments, 

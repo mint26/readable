@@ -55,13 +55,11 @@ const reducer = (state = initialState, action) => {
       return Object.assign({}, state, {posts: updatedPosts});
 
     case actiontypes.DELETE_SELECTED_POST: 
-      console.log("IN HERE"); 
       let ss = [...state.posts]; 
       ss = ss.filter(post => {
         return post.id !== action.id;
       }); 
-      console.log('deleted selected reducer', state,{posts: ss, selectedPost: null} ); 
-      return Object.assign({}, state, {posts: ss, selectedPost: null});
+      return Object.assign({}, state, {posts: ss, selectedPost: null, comments: []});
     
     case actiontypes.DELETE_COMMENT: 
       let updatedComments = [...state.comments]; 

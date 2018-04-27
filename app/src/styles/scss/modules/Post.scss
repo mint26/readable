@@ -42,31 +42,36 @@
       .post-footer {
         margin: $margin-1 0;
         display: block;
-        text-align: right;
         padding-top: $padding-1;
         font-size: $font-size-small;
 
-        .author {
-          font-weight: bold;
-          font-style: italic;
+        .comment-count{
+          float:left;
         }
-
-        .edit-icon{
-          padding:$padding-1; 
-          cursor:pointer;
+        .right-panel {
+          float:right;
+          .author {
+            font-weight: bold;
+            font-style: italic;
+          }
+  
+          .edit-icon{
+            padding:$padding-1; 
+            cursor:pointer;
+              &:hover{
+                color:lightgrey; 
+              }
+              img{
+                width:20px; 
+                height:20px; 
+              }
+          }
+          .delete-icon{
+            padding:$padding-1; 
+            cursor:pointer;
             &:hover{
               color:lightgrey; 
             }
-            img{
-              width:20px; 
-              height:20px; 
-            }
-        }
-        .delete-icon{
-          padding:$padding-1; 
-          cursor:pointer;
-          &:hover{
-            color:lightgrey; 
           }
         }
       }

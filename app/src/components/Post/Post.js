@@ -123,14 +123,17 @@ class Post extends Component {
         <div className={`${createCssClassByType(this.props.postType).postMain} post-main`}>
           {this.props.post.body}
           <div className="col-12 post-footer">
-            Written by
-            <span className="author"> {this.props.post.author} </span>
-            on {formattedDate}
-            <span className="edit-icon" onClick={ e => {this.props.onEditHandler(this.props.post.id)}}>
-              <i className="fas fa-edit"></i>
-            </span>
-            <span className="delete-icon" onClick={ e => {this.props.onDeleteHandler(this.props.post.id)}}>
-              <i className="fas fa-trash-alt"></i>
+            <span className="comment-count">{this.props.post.commentCount} comments</span>
+            <span className="right-panel">
+              Written by
+              <span className="author"> {this.props.post.author} </span>
+              on {formattedDate}
+              <span className="edit-icon" onClick={ e => {this.props.onEditHandler(this.props.post.id)}}>
+                <i className="fas fa-edit"></i>
+              </span>
+              <span className="delete-icon" onClick={ e => {this.props.onDeleteHandler(this.props.post.id)}}>
+                <i className="fas fa-trash-alt"></i>
+              </span>
             </span>
           </div>
         </div>

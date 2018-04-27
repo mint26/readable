@@ -13,14 +13,18 @@ class DefaultView extends Component {
     this.state = {
       ascVoteOrder : true, 
       ascTimeOrder : true, 
-      currentCategory: 'all'
+      currentCategory: null
     }
   }
 
   init = () => {
-    let category = this.props.match.params.category; 
-    this.props.init(category);
+    let category = this.props.match.params.category ? this.props.match.params.category : 'all';  
+    if (category && this.state.currentCategory !== category) {
+      this.setState({currentCategory: category}); 
+      this.props.init(category);
+    } 
   }
+  
   componentDidMount() {
     this.init(); 
   }
@@ -52,9 +56,7 @@ class DefaultView extends Component {
   }
   
   getPostByCategory = (category) => {
-    //this.props.getPostByCategory(category); 
     this.props.history.push('/' + category); 
-    this.setState({currentCategory: category}); 
   }
 
   addPostHandler = () => {
@@ -109,6 +111,7 @@ class DefaultView extends Component {
 }
 
 const mapStateToProps = state => {
+  console.log('default state', state); 
   return {
     categories: state.reducer.categories,
     posts: state.reducer.posts
