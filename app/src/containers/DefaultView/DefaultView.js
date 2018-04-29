@@ -56,7 +56,8 @@ class DefaultView extends Component {
   }
   
   getPostByCategory = (category) => {
-    this.props.history.push('/' + category); 
+    if (category != this.state.currentCategory)
+      this.props.history.push('/' + category); 
   }
 
   addPostHandler = () => {
@@ -110,8 +111,7 @@ class DefaultView extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  console.log('default state', state); 
+const mapStateToProps = state => { 
   return {
     categories: state.reducer.categories,
     posts: state.reducer.posts

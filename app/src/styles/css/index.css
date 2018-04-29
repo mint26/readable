@@ -196,6 +196,20 @@ header {
 .edit-post-view button {
   margin: 0 0 0 1em; }
 
+.edit-post-view .dropdown-category {
+  width: 100%;
+  padding: 0; }
+  .edit-post-view .dropdown-category button {
+    width: 100% !important;
+    margin: 0;
+    text-align: left;
+    background-color: white;
+    color: black;
+    border-color: #ced4da; }
+
+.edit-post-view .dropdown-menu {
+  width: 100%; }
+
 .post-view {
   padding: 1em 0; }
   .post-view .post .post-header .header-title {

@@ -1,19 +1,11 @@
 import React, { Component } from "react";
 import CustomForm from '../../components/Form/Form'; 
 import { connect } from "react-redux";
-import { Redirect } from 'react-router-dom'; 
 import * as actions from "../../redux/actions";
 import Post from '../../models/Post'; 
 import DateService from "../../services/DateService";
 
 class EditPostView extends Component {
-
-  constructor(props){
-    super(props); 
-    this.state = {
-      toMain : false
-    }
-  }
 
   componentDidMount(){
       //Init existing post; 
@@ -21,35 +13,30 @@ class EditPostView extends Component {
       this.props.getPostById(id); 
   }
 
-  componentDidUpdate(){
-    if (this.props.toMain){
-      this.setState({toMain: true}); 
-    }
-  }
-
   onCancel = () => {
-    this.setState({toMain: true}); 
+    this.props.history.goBack(); 
   }
 
-  onSubmit = (title, body) => {
+  onSubmit = (title, body, category) => {
     if (this.props.match && this.props.match.params && this.props.match.params.id){
       let updatedPost = {...this.props.selectedPost}; 
       updatedPost.title = title; 
       updatedPost.body = body;
+      if (category) {
+        updatedPost.category = category; 
+      }
       this.props.updatePost(updatedPost);
+
     } else {
-      let newPost = new Post(DateService.getCurrentDateTimestamp(), title, body, 'Min', 'Udacity', 0, false); 
+      let newPost = new Post(DateService.getCurrentDateTimestamp(), title, body, 'Min', category, 0, false); 
       if (newPost) {
         this.props.addNewPost(newPost); 
       }
     }
+    this.props.history.goBack(); 
   }
 
   render() { 
-    if (this.state.toMain === true) {
-      return <Redirect to='/' />
-    }
-
     let isEdit = this.props.match && this.props.match.params && this.props.match.params.id; 
     return (
             <div className="edit-post-view">
@@ -58,10 +45,12 @@ class EditPostView extends Component {
               </div>
               <div className="edit-post">
                 <CustomForm 
+                category = {this.props.selectedPost ? this.props.selectedPost.category : null}
+                categories = {this.props.categories}
                 onSubmitHandler={this.onSubmit}
                 onCancelHandler={this.onCancel} 
-                bodyText={this.props.selectedPost? this.props.selectedPost.body: null} 
-                title={this.props.selectedPost? this.props.selectedPost.title: null}
+                bodyText={this.props.selectedPost? this.props.selectedPost.body : null} 
+                title={this.props.selectedPost? this.props.selectedPost.title : null}
                 />
               </div>
             </div>
@@ -74,7 +63,8 @@ const mapStateToProps = state => {
   return {
     selectedPost: state.reducer.selectedPost, 
     comments: state.reducer.comments, 
-    toMain: state.reducer.toMain
+    toMain: state.reducer.toMain,
+    categories: state.reducer.categories,
   };
 };
 

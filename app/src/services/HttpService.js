@@ -87,7 +87,8 @@ class HttpService {
     let url = API_URL + API_END_POINTS.posts + '/' + post.id;  
     let updatedContent = {
       title: post.title, 
-      body: post.body
+      body: post.body, 
+      category: post.category
     }
     return fetch(url, {
       method:"PUT", 

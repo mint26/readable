@@ -25,6 +25,7 @@ export const init = (category) => {
   };
 }
 
+
 export const sortByVotes = (posts, order) => {
   return dispatch => {
     AppService.sortByVotes(posts,order)
@@ -73,16 +74,19 @@ export const getPostByCategory = (category) => {
 
 export const getPostById = (id) => {
   return dispatch => {
+    AppService.getAllCategories().then(result => {
+      if (result.categories.length > 0){
+        result.categories.shift(); 
+      }
       AppService.getPostWithCommentsById(id).then(item => {
         dispatch({
           type: actionTypes.GET_POST_BY_ID, 
           selectedPost: item.selectedPost, 
-          comments: item.comments
+          comments: item.comments,
+          categories: result.categories
         })
       })
-      .catch(err => {
-        return Promise.resolve(err); 
-      })
+    });
   }
 }
 
