@@ -92,7 +92,7 @@ class Post extends Component {
   }
 
   render(){
-    let formattedDate = DateService.formatDate(this.props.timestamp);
+    let formattedDate = DateService.formatDate(this.props.post.timestamp);
     let comments = this.props.comments ? this.props.comments.map((comment) => {
     return <Comment key={comment.id} comment={comment} onDeleteHandler={this.props.onCommentDeleteHandler} 
     onUpVoteComment={this.props.onUpVoteComment} onDownVoteComment={this.props.onDownVoteComment}/>
