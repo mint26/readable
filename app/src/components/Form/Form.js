@@ -24,14 +24,14 @@ class CustomForm extends Component {
     }
 
     titleOnChanged = (e) => {
-        let val = e.currentTarget.value; 
+        const val = e.currentTarget.value; 
         this.setState({
             title: val
         });
     }
 
     bodyOnChanged = (e) => {
-        let val = e.currentTarget.value; 
+        const val = e.currentTarget.value; 
         this.setState({
             body: val
         });

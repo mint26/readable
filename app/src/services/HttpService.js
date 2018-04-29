@@ -1,7 +1,4 @@
-// const API_URL = process.env.REACT_APP_API_URL;
-
-const API_URL = "http://localhost:3001";
-
+const API_URL = process.env.REACT_APP_API_URL;
 const API_END_POINTS = {
   categories: "/categories",
   posts: "/posts",
@@ -26,61 +23,52 @@ const headers = {
   'Authorization': token,
 }
 
+const getRequest = (method, url, body) => {
+  return fetch(url, {
+    method: method,
+    headers: headers,
+    body: JSON.stringify(body)
+  }).then(response => response.json());
+}
 
+const METHOD = {
+  GET: "GET", 
+  POST: "POST", 
+  DELETE: "DELETE", 
+  PUT: "PUT", 
+}
 class HttpService {
   getAllCategories = () => {
-    let url = API_URL + API_END_POINTS.categories;
-    return fetch(url, {
-      method: "GET",
-      headers: headers
-    }).then(response => response.json());
+    let url = `${API_URL}${API_END_POINTS.categories}`;
+    return getRequest(METHOD.GET, url); 
   };
 
   getAllPosts = () => {
-    let url = API_URL + API_END_POINTS.posts;
-    return fetch(url, {
-      method: "GET",
-      headers: headers
-    }).then(response => response.json());
+    let url = `${API_URL}${API_END_POINTS.posts}`;;
+    return getRequest(METHOD.GET, url); 
   };
 
   getPostsByCategories = (category) => {
-    let url = API_URL + "/{category}" + API_END_POINTS.posts;
+    let url = `${API_URL}/{category}${API_END_POINTS.categories}`;
     url = interpolateURL(url, category);
-
-    return fetch(url, {
-      method:"GET", 
-      headers: headers
-    }).then(response => response.json()); 
+    return getRequest(METHOD.GET, url); 
   }
 
   getPostById = (id) => {
     let url = API_URL + API_END_POINTS.posts + '/' + id;
 
-    return fetch(url, {
-      method:"GET", 
-      headers: headers
-    }).then(response => response.json()); 
+    return getRequest(METHOD.GET, url); 
   }
 
   getCommentsByPostId = (id) => {
     let url = API_URL + API_END_POINTS.posts + '/' + id + API_END_POINTS.comments;
 
-    return fetch(url, {
-      method:"GET", 
-      headers: headers
-    }).then(response => response.json()); 
+    return getRequest(METHOD.GET, url); 
   }
 
   addNewPost = (post) => {
     let url = API_URL + API_END_POINTS.posts;  
-    return fetch(url, {
-      method:"POST", 
-      body: JSON.stringify(post), 
-      headers: headers
-    }).then(response => {
-      return response.json()
-    }); 
+    return getRequest(METHOD.POST, url, post);  
   }
 
   updatePost = (post) => {
@@ -90,44 +78,24 @@ class HttpService {
       body: post.body, 
       category: post.category
     }
-    return fetch(url, {
-      method:"PUT", 
-      body: JSON.stringify(updatedContent), 
-      headers: headers
-    }).then(response => {
-      return response.json()
-    }); 
+
+    return getRequest(METHOD.PUT, url, updatedContent); 
   }
 
   deletePost = (id) => {
     let url = API_URL + API_END_POINTS.posts + '/' + id; 
-    return fetch(url, {
-      method:"DELETE", 
-      headers: headers
-    }).then(response => {
-      return response.json()
-    }); 
+    return getRequest(METHOD.DELETE, url); 
   }
 
   deleteComment = (id) => {
     let url = API_URL + API_END_POINTS.comments + '/' + id; 
-    return fetch(url, {
-      method:"DELETE", 
-      headers: headers
-    }).then(response => {
-      return response.json()
-    }); 
+    return getRequest(METHOD.DELETE, url); 
   }
 
   addComment = (comment) => {
     let url = API_URL + API_END_POINTS.comments;  
-    return fetch(url, {
-      method:"POST", 
-      body: JSON.stringify(comment), 
-      headers: headers
-    }).then(response => {
-      return response.json()
-    }); 
+    return getRequest(METHOD.POST, url, comment); 
+
   }
 
   updatePostVote = (type, id) => {
@@ -136,13 +104,8 @@ class HttpService {
       option: type
     };
 
-    return fetch(url, {
-      method:"POST", 
-      body: JSON.stringify(payload),
-      headers: headers
-    }).then(response => {
-      return response.json()
-    }); 
+    return getRequest(METHOD.POST, url, payload); 
+
   }
 
   updateCommentVote = (type, id) => {
@@ -150,14 +113,9 @@ class HttpService {
     let payload = {
       option: type
     };
-    
-    return fetch(url, {
-      method:"POST", 
-      body: JSON.stringify(payload),
-      headers: headers
-    }).then(response => {
-      return response.json()
-    }); 
+
+    return getRequest(METHOD.POST, url, payload); 
+
   }
 }
 

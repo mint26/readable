@@ -56,7 +56,7 @@ class DefaultView extends Component {
   }
   
   getPostByCategory = (category) => {
-    if (category != this.state.currentCategory)
+    if (category !== this.state.currentCategory)
       this.props.history.push('/' + category); 
   }
 
