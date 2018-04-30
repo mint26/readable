@@ -41,8 +41,8 @@
     .post-main {
       .post-footer {
         margin: $margin-1 0;
-        display: block;
-        padding-top: $padding-1;
+        display: inline-block;
+        padding: 0; 
         font-size: $font-size-small;
 
         .comment-count{
@@ -50,6 +50,7 @@
         }
         .right-panel {
           float:right;
+          text-align:right; 
           .author {
             font-weight: bold;
             font-style: italic;
@@ -109,11 +110,19 @@
 @media only screen and (max-width: $mobile-max-width) {
   .post {
     .post-entry {
-      display: block;
+      display: inline-block;
 
       .post-main {
         border-bottom: none;
         margin-bottom: $margin-1;
+
+        .post-footer {
+          .right-panel {
+            margin-top:$margin-1; 
+            float:left !important; 
+            text-align: left;
+          }
+        }
       }
 
       .post-comments {

@@ -75,13 +75,14 @@ header {
     margin-bottom: 1em; }
     .post .post-entry .post-main .post-footer {
       margin: 1em 0;
-      display: block;
-      padding-top: 1em;
+      display: inline-block;
+      padding: 0;
       font-size: 0.8em; }
       .post .post-entry .post-main .post-footer .comment-count {
         float: left; }
       .post .post-entry .post-main .post-footer .right-panel {
-        float: right; }
+        float: right;
+        text-align: right; }
         .post .post-entry .post-main .post-footer .right-panel .author {
           font-weight: bold;
           font-style: italic; }
@@ -119,10 +120,14 @@ header {
 
 @media only screen and (max-width: 767.69px) {
   .post .post-entry {
-    display: block; }
+    display: inline-block; }
     .post .post-entry .post-main {
       border-bottom: none;
       margin-bottom: 1em; }
+      .post .post-entry .post-main .post-footer .right-panel {
+        margin-top: 1em;
+        float: left !important;
+        text-align: left; }
     .post .post-entry .post-comments {
       border: none; } }
 
