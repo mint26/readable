@@ -24,11 +24,20 @@ const headers = {
 }
 
 const getRequest = (method, url, body) => {
-  return fetch(url, {
+
+  let payload = {
     method: method,
-    headers: headers,
-    body: JSON.stringify(body)
-  }).then(response => response.json());
+    headers: headers
+  }
+  if (body) {
+    payload.body = JSON.stringify(body);
+  }
+  return fetch(url, payload).then(response => {
+      if (response){
+        return response.json();
+      }
+      return null; 
+  });
 }
 
 const METHOD = {
@@ -49,7 +58,7 @@ class HttpService {
   };
 
   getPostsByCategories = (category) => {
-    let url = `${API_URL}/{category}${API_END_POINTS.categories}`;
+    let url = `${API_URL}/{category}${API_END_POINTS.posts}`;
     url = interpolateURL(url, category);
     return getRequest(METHOD.GET, url); 
   }

@@ -9,3 +9,5 @@ export const VoteType = {
     UpVote : "upVote", 
     DownVote : "downVote"
 }
+
+export const DefaultString = "Select a Category";

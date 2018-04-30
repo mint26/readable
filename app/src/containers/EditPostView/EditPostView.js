@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import * as actions from "../../redux/actions";
 import Post from '../../models/Post'; 
 import DateService from "../../services/DateService";
+import { DefaultString } from '../../constants/constants';
 
 class EditPostView extends Component {
 
@@ -28,7 +29,8 @@ class EditPostView extends Component {
       this.props.updatePost(updatedPost);
 
     } else {
-      let newPost = new Post(DateService.getCurrentDateTimestamp(), title, body, 'Min', category, 0, false); 
+      let categoryValue = category !== DefaultString ? category : 'react'; 
+      let newPost = new Post(DateService.getCurrentDateTimestamp(), title, body, 'Min', categoryValue, 0, false); 
       if (newPost) {
         this.props.addNewPost(newPost); 
       }

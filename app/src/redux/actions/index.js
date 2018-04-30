@@ -7,19 +7,23 @@ export const init = (category) => {
   return dispatch => { 
     if (category && category.trim().toLowerCase() !== 'all') {
       AppService.getPostsByCategory(category).then(item => {
-        dispatch({
-          type: actionTypes.INIT,
-          posts: item.posts,
-          categories: item.categories
-        });
+        if (item){
+          dispatch({
+            type: actionTypes.INIT,
+            posts: item.posts,
+            categories: item.categories
+          });
+        }
       })
     } else {
       AppService.getAllCategories().then(item => {
-        dispatch({
-          type: actionTypes.INIT,
-          posts: item.posts,
-          categories: item.categories
-        });
+        if (item){
+          dispatch({
+            type: actionTypes.INIT,
+            posts: item.posts,
+            categories: item.categories
+          });
+        }
       });
     }
   };
@@ -30,10 +34,12 @@ export const sortByVotes = (posts, order) => {
   return dispatch => {
     AppService.sortByVotes(posts,order)
             .then(posts => {
-              dispatch({
-                type: actionTypes.SORT_BY_VOTES,
-                posts: posts
-              });
+              if (posts) {
+                dispatch({
+                  type: actionTypes.SORT_BY_VOTES,
+                  posts: posts
+                });
+              }
             })
   }
 };
@@ -42,10 +48,12 @@ export const sortByTimestamp = (posts, order) => {
   return dispatch => {
     AppService.sortByTimestamp(posts,order)
             .then(posts => {
-              dispatch({
-                type: actionTypes.SORT_BY_VOTES,
-                posts: posts
-              });
+              if (posts) {
+                dispatch({
+                  type: actionTypes.SORT_BY_VOTES,
+                  posts: posts
+                });
+              }
             })
   }
 };
@@ -55,18 +63,22 @@ export const getPostByCategory = (category) => {
   return dispatch => {
     if (category === AllCategoriesPath){
       HttpService.getAllPosts().then (posts => {
-        dispatch({
-          type: actionTypes.GET_POSTS_BY_CATEGORY, 
-          posts: posts
-        })
+        if (posts) {
+          dispatch({
+            type: actionTypes.GET_POSTS_BY_CATEGORY, 
+            posts: posts
+          })
+        }
       })
     } else {
       HttpService.getPostsByCategories(category)
       .then(posts => {
-        dispatch({
-          type: actionTypes.GET_POSTS_BY_CATEGORY, 
-          posts: posts
-        })
+        if (posts){
+          dispatch({
+            type: actionTypes.GET_POSTS_BY_CATEGORY, 
+            posts: posts
+          })
+        }
       }); 
     }
   }
@@ -75,16 +87,18 @@ export const getPostByCategory = (category) => {
 export const getPostById = (id) => {
   return dispatch => {
     AppService.getAllCategories().then(result => {
-      if (result.categories.length > 0){
+      if (result && result.categories.length > 0){
         result.categories.shift(); 
       }
       AppService.getPostWithCommentsById(id).then(item => {
-        dispatch({
-          type: actionTypes.GET_POST_BY_ID, 
-          selectedPost: item.selectedPost, 
-          comments: item.comments,
-          categories: result.categories
-        })
+        if (item && result){
+          dispatch({
+            type: actionTypes.GET_POST_BY_ID, 
+            selectedPost: item.selectedPost, 
+            comments: item.comments,
+            categories: result.categories
+          })
+        }
       })
     });
   }

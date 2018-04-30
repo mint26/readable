@@ -29,11 +29,12 @@ class AppService {
                 if (result && Array.isArray(result.categories)){
                     let allCategory = new Category('all', 'all'); 
                     result.categories.unshift(allCategory); 
+                    return Promise.resolve({
+                        categories: result.categories, 
+                        posts: posts
+                    });
                 }
-                return Promise.resolve({
-                            categories: result.categories, 
-                            posts: posts
-                        });
+                
             });
         });
     }
@@ -44,11 +45,12 @@ class AppService {
                 if (result && Array.isArray(result.categories)){
                     let allCategory = new Category('all', 'all'); 
                     result.categories.unshift(allCategory); 
+                    return Promise.resolve({
+                        categories: result.categories, 
+                        posts: posts
+                    });
                 }
-                return Promise.resolve({
-                            categories: result.categories, 
-                            posts: posts
-                        });
+
             });
         });
     }

@@ -99,7 +99,6 @@ class PostView extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log('state' , state); 
   return {
     selectedPost: state.reducer.selectedPost, 
     comments: state.reducer.comments, 

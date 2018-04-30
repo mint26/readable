@@ -1,6 +1,6 @@
 import React, { Component }  from 'react'; 
 import { Button, Form, FormGroup, Input, Dropdown, DropdownToggle, DropdownItem, DropdownMenu } from 'reactstrap';
-
+import { DefaultString } from '../../constants/constants'; 
 class CustomForm extends Component {
     
 
@@ -9,7 +9,7 @@ class CustomForm extends Component {
         body: '',
         isInit: true, 
         dropdownOpen: false, 
-        category: this.props.category ? this.props.category : "Select a Category"
+        category: this.props.category ? this.props.category : DefaultString
     }
 
     componentDidUpdate(){
@@ -18,7 +18,7 @@ class CustomForm extends Component {
                 title: this.props.title,
                 body: this.props.bodyText,
                 isInit: false, 
-                category: this.props.category ? this.props.category : "Select a Category"
+                category: this.props.category ? this.props.category : DefaultString
             })
         }
     }
