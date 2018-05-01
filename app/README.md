@@ -129,6 +129,7 @@ The codes can be further refactored for better performance and maintainability: 
 * Making use of ES6 destructuring syntax 
 * Some duplication of codes can be further reduced. 
 * Implementing unit testing to make the application more robust
+* Improve on the UI design
 
 
 ## License 
