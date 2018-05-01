@@ -1,4 +1,4 @@
-import UtilService from '../services/UtilService'; 
+import UtilService from "../services/UtilService";
 
 class Comment {
   constructor(

@@ -1,23 +1,23 @@
 import * as actionTypes from "../actiontypes";
 import HttpService from "../../services/HttpService";
 import AppService from "../../services/AppService";
-import { AllCategoriesPath } from '../../constants/constants'; 
+import { AllCategoriesPath } from "../../constants/constants";
 
-export const init = (category) => {
-  return dispatch => { 
-    if (category && category.trim().toLowerCase() !== 'all') {
+export const init = category => {
+  return dispatch => {
+    if (category && category.trim().toLowerCase() !== "all") {
       AppService.getPostsByCategory(category).then(item => {
-        if (item){
+        if (item) {
           dispatch({
             type: actionTypes.INIT,
             posts: item.posts,
             categories: item.categories
           });
         }
-      })
+      });
     } else {
       AppService.getAllCategories().then(item => {
-        if (item){
+        if (item) {
           dispatch({
             type: actionTypes.INIT,
             posts: item.posts,
@@ -27,186 +27,180 @@ export const init = (category) => {
       });
     }
   };
-}
-
+};
 
 export const sortByVotes = (posts, order) => {
   return dispatch => {
-    AppService.sortByVotes(posts,order)
-            .then(posts => {
-              if (posts) {
-                dispatch({
-                  type: actionTypes.SORT_BY_VOTES,
-                  posts: posts
-                });
-              }
-            })
-  }
+    AppService.sortByVotes(posts, order).then(posts => {
+      if (posts) {
+        dispatch({
+          type: actionTypes.SORT_BY_VOTES,
+          posts: posts
+        });
+      }
+    });
+  };
 };
 
 export const sortByTimestamp = (posts, order) => {
   return dispatch => {
-    AppService.sortByTimestamp(posts,order)
-            .then(posts => {
-              if (posts) {
-                dispatch({
-                  type: actionTypes.SORT_BY_VOTES,
-                  posts: posts
-                });
-              }
-            })
-  }
+    AppService.sortByTimestamp(posts, order).then(posts => {
+      if (posts) {
+        dispatch({
+          type: actionTypes.SORT_BY_VOTES,
+          posts: posts
+        });
+      }
+    });
+  };
 };
 
-
-export const getPostByCategory = (category) => {
+export const getPostByCategory = category => {
   return dispatch => {
-    if (category === AllCategoriesPath){
-      HttpService.getAllPosts().then (posts => {
+    if (category === AllCategoriesPath) {
+      HttpService.getAllPosts().then(posts => {
         if (posts) {
           dispatch({
-            type: actionTypes.GET_POSTS_BY_CATEGORY, 
+            type: actionTypes.GET_POSTS_BY_CATEGORY,
             posts: posts
-          })
+          });
         }
-      })
+      });
     } else {
-      HttpService.getPostsByCategories(category)
-      .then(posts => {
-        if (posts){
+      HttpService.getPostsByCategories(category).then(posts => {
+        if (posts) {
           dispatch({
-            type: actionTypes.GET_POSTS_BY_CATEGORY, 
+            type: actionTypes.GET_POSTS_BY_CATEGORY,
             posts: posts
-          })
+          });
         }
-      }); 
+      });
     }
-  }
-}
+  };
+};
 
-export const getPostById = (id) => {
+export const getPostById = id => {
   return dispatch => {
     AppService.getAllCategories().then(result => {
-      if (result && result.categories.length > 0){
-        result.categories.shift(); 
+      if (result && result.categories.length > 0) {
+        result.categories.shift();
       }
       AppService.getPostWithCommentsById(id).then(item => {
-        if (item && result){
+        if (item && result) {
           dispatch({
-            type: actionTypes.GET_POST_BY_ID, 
-            selectedPost: item.selectedPost, 
+            type: actionTypes.GET_POST_BY_ID,
+            selectedPost: item.selectedPost,
             comments: item.comments,
             categories: result.categories
-          })
+          });
         }
-      })
+      });
     });
-  }
-}
+  };
+};
 
-export const addNewPost = (post) => {
+export const addNewPost = post => {
   return dispatch => {
     AppService.addNewPost(post).then(result => {
       if (result) {
-        dispatch ({
-          type: actionTypes.ADD_POST, 
+        dispatch({
+          type: actionTypes.ADD_POST,
           toMain: true
-        })
+        });
       }
-    })
-  }
-}
+    });
+  };
+};
 
-export const updatePost = (post) => {
+export const updatePost = post => {
   return dispatch => {
     AppService.updatePost(post).then(updatedPost => {
       if (updatedPost) {
         dispatch({
-          type: actionTypes.UPDATE_POST, 
-          toMain: true, 
+          type: actionTypes.UPDATE_POST,
+          toMain: true,
           updatedPost: updatedPost
-        })
+        });
       }
-    })
-  }
-}
+    });
+  };
+};
 
-export const deletePost = (id) => {
+export const deletePost = id => {
   return dispatch => {
     AppService.deletePost(id).then(result => {
       if (result) {
-        dispatch ({
-          type: actionTypes.DELETE_POST, 
-          id: id
-        })
-      }
-    })
-  }
-}
-
-export const deleteSelectedPost = (id) => {
-  return dispatch => {
-    return AppService.deletePost(id).then(result => {
-      if (result){
-        return dispatch ({
-          type: actionTypes.DELETE_SELECTED_POST, 
+        dispatch({
+          type: actionTypes.DELETE_POST,
           id: id
         });
       }
-      return null; 
-    })
-  }
-}
+    });
+  };
+};
 
-export const deleteComment = (id) => {
+export const deleteSelectedPost = id => {
+  return dispatch => {
+    return AppService.deletePost(id).then(result => {
+      if (result) {
+        return dispatch({
+          type: actionTypes.DELETE_SELECTED_POST,
+          id: id
+        });
+      }
+      return null;
+    });
+  };
+};
+
+export const deleteComment = id => {
   return dispatch => {
     AppService.deleteComment(id).then(result => {
       if (result) {
-        dispatch ({
-          type: actionTypes.DELETE_COMMENT, 
+        dispatch({
+          type: actionTypes.DELETE_COMMENT,
           id: id
-        })
+        });
       }
-    })
-  }
-}
+    });
+  };
+};
 
-export const addComment = (comment) => {
-
+export const addComment = comment => {
   return dispatch => {
     AppService.addComment(comment).then(result => {
       if (result) {
-        dispatch ({
-          type: actionTypes.ADD_COMMENT, 
+        dispatch({
+          type: actionTypes.ADD_COMMENT,
           comment: comment
-        })
+        });
       }
-    })
-  }
-}
+    });
+  };
+};
 
 export const updatePostVote = (type, id) => {
   return dispatch => {
     AppService.updatePostVote(type, id).then(post => {
       if (post) {
-        return dispatch ({
+        return dispatch({
           type: actionTypes.UPDATE_POST_VOTE,
           post: post
-        })
+        });
       }
-    })
-  }
-}; 
+    });
+  };
+};
 
 export const updateCommentVote = (type, id) => {
   return dispatch => {
     AppService.updateCommentVote(type, id).then(comment => {
       if (comment) {
-        return dispatch ({
+        return dispatch({
           type: actionTypes.UPDATE_COMMENT_VOTE,
           comment: comment
-        })
+        });
       }
-    })
-  }
-}; 
+    });
+  };
+};

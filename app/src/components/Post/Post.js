@@ -110,7 +110,7 @@ class Post extends Component {
       <div className="col-12 post-header">
         <span className="col-8 header-title" onClick={e => {
             if (this.props.selectedPostHandler)
-            this.props.selectedPostHandler(this.props.post.id)
+            this.props.selectedPostHandler(this.props.post.id, this.props.post.category);
           }
         }>{this.props.post.title}</span>
         <span className="col-4 header-vote">
@@ -128,7 +128,7 @@ class Post extends Component {
               Written by
               <span className="author"> {this.props.post.author} </span>
               on {formattedDate}
-              <span className="edit-icon" onClick={ e => {this.props.onEditHandler(this.props.post.id)}}>
+              <span className="edit-icon" onClick={ e => {this.props.onEditHandler(this.props.post.id, this.props.post.category)}}>
                 <i className="fas fa-edit"></i>
               </span>
               <span className="delete-icon" onClick={ e => {this.props.onDeleteHandler(this.props.post.id)}}>
