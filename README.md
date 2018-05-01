@@ -109,7 +109,7 @@ Post is displayed with the following:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://imgur.com/a/zRj1B8z' title='Video Walkthrough 1' width='' alt='Video Walkthrough 1' />
+<img src='http://imgur.com/a/9iA9TyQ' title='Video Walkthrough 1' width='' alt='Video Walkthrough 1' />
 
 <img src='https://imgur.com/a/sodoFrd' title='Video Walkthrough 2' width='' alt='Video Walkthrough 2' />
 
