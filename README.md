@@ -109,9 +109,8 @@ Post is displayed with the following:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://imgur.com/a/9iA9TyQ' title='Video Walkthrough 1' width='' alt='Video Walkthrough 1' />
-
-<img src='https://imgur.com/a/sodoFrd' title='Video Walkthrough 2' width='' alt='Video Walkthrough 2' />
+![ezgif com-video-to-gif 1](https://user-images.githubusercontent.com/25121123/39465430-de4b2d30-4d55-11e8-8a28-fa2002435196.gif)
+![ezgif com-video-to-gif](https://user-images.githubusercontent.com/25121123/39465431-de7b641e-4d55-11e8-8bca-265949412751.gif)
 
 ## Readable API Server 
 
